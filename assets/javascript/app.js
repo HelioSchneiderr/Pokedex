@@ -1,11 +1,19 @@
 const fetchPokemon = () =>{
-    const url = `https://pokeapi.co/api/v2/pokemon/3`;
+    const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
     
-    fetch(url)
-    .then(resposta => resposta.json())
-    .then(pokemon => {
-        console.log(pokemon);
-    });
+    const pokemonPromises = [];
+
+    for(let i = 1; 1<=150; i++){
+        pokemonPromises.push(fetch(getPokemonUrl(i))
+        .then(responde => responde.json()))
+    }
+
+    Promise.all(pokemonPromises)
+    .then(pokemons => {
+        const lisPokemons = pokemons.reduce((accumulator, pokemon) =>{
+
+        }, ``)
+    })
 }
 
 fetchPokemon();
